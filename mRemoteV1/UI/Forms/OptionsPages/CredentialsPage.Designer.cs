@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CredentialsPage));
             this.pnlDefaultCredentials = new System.Windows.Forms.Panel();
+            this.chkUseAdmPwd = new mRemoteNG.UI.Controls.Base.NGCheckBox();
             this.radCredentialsCustom = new mRemoteNG.UI.Controls.Base.NGRadioButton();
             this.lblDefaultCredentials = new mRemoteNG.UI.Controls.Base.NGLabel();
             this.radCredentialsNoInfo = new mRemoteNG.UI.Controls.Base.NGRadioButton();
@@ -45,6 +46,7 @@
             // 
             // pnlDefaultCredentials
             // 
+            this.pnlDefaultCredentials.Controls.Add(this.chkUseAdmPwd);
             this.pnlDefaultCredentials.Controls.Add(this.radCredentialsCustom);
             this.pnlDefaultCredentials.Controls.Add(this.lblDefaultCredentials);
             this.pnlDefaultCredentials.Controls.Add(this.radCredentialsNoInfo);
@@ -57,8 +59,22 @@
             this.pnlDefaultCredentials.Controls.Add(this.lblCredentialsDomain);
             this.pnlDefaultCredentials.Location = new System.Drawing.Point(3, 3);
             this.pnlDefaultCredentials.Name = "pnlDefaultCredentials";
-            this.pnlDefaultCredentials.Size = new System.Drawing.Size(596, 175);
+            this.pnlDefaultCredentials.Size = new System.Drawing.Size(596, 210);
             this.pnlDefaultCredentials.TabIndex = 0;
+            // 
+            // chkUseAdmPwd
+            // 
+            this.chkUseAdmPwd._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
+            this.chkUseAdmPwd.AutoSize = true;
+            this.chkUseAdmPwd.Enabled = false;
+            this.chkUseAdmPwd.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkUseAdmPwd.Location = new System.Drawing.Point(126, 145);
+            this.chkUseAdmPwd.Name = "chkUseAdmPwd";
+            this.chkUseAdmPwd.Size = new System.Drawing.Size(229, 17);
+            this.chkUseAdmPwd.TabIndex = 8;
+            this.chkUseAdmPwd.Text = "use AdmPwd.E to retrieve the password";
+            this.chkUseAdmPwd.UseVisualStyleBackColor = true;
+            this.chkUseAdmPwd.CheckedChanged += new System.EventHandler(this.chkUseAdmPwd_CheckedChanged);
             // 
             // radCredentialsCustom
             // 
@@ -106,7 +122,7 @@
             // 
             this.txtCredentialsDomain.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtCredentialsDomain.Enabled = false;
-            this.txtCredentialsDomain.Location = new System.Drawing.Point(140, 147);
+            this.txtCredentialsDomain.Location = new System.Drawing.Point(140, 170);
             this.txtCredentialsDomain.Name = "txtCredentialsDomain";
             this.txtCredentialsDomain.Size = new System.Drawing.Size(150, 20);
             this.txtCredentialsDomain.TabIndex = 9;
@@ -125,7 +141,7 @@
             // 
             this.txtCredentialsPassword.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtCredentialsPassword.Enabled = false;
-            this.txtCredentialsPassword.Location = new System.Drawing.Point(140, 120);
+            this.txtCredentialsPassword.Location = new System.Drawing.Point(140, 121);
             this.txtCredentialsPassword.Name = "txtCredentialsPassword";
             this.txtCredentialsPassword.Size = new System.Drawing.Size(150, 20);
             this.txtCredentialsPassword.TabIndex = 7;
@@ -134,7 +150,7 @@
             // lblCredentialsPassword
             // 
             this.lblCredentialsPassword.Enabled = false;
-            this.lblCredentialsPassword.Location = new System.Drawing.Point(34, 123);
+            this.lblCredentialsPassword.Location = new System.Drawing.Point(34, 124);
             this.lblCredentialsPassword.Name = "lblCredentialsPassword";
             this.lblCredentialsPassword.Size = new System.Drawing.Size(100, 13);
             this.lblCredentialsPassword.TabIndex = 6;
@@ -153,7 +169,7 @@
             // lblCredentialsDomain
             // 
             this.lblCredentialsDomain.Enabled = false;
-            this.lblCredentialsDomain.Location = new System.Drawing.Point(34, 150);
+            this.lblCredentialsDomain.Location = new System.Drawing.Point(34, 173);
             this.lblCredentialsDomain.Name = "lblCredentialsDomain";
             this.lblCredentialsDomain.Size = new System.Drawing.Size(100, 13);
             this.lblCredentialsDomain.TabIndex = 8;
@@ -166,12 +182,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.pnlDefaultCredentials);
             this.Name = "CredentialsPage";
-            this.PageIcon = ((System.Drawing.Icon)(resources.GetObject("$this.PageIcon")));
             this.Size = new System.Drawing.Size(610, 489);
             this.pnlDefaultCredentials.ResumeLayout(false);
             this.pnlDefaultCredentials.PerformLayout();
             this.ResumeLayout(false);
-
+            this.PageIcon = ((System.Drawing.Icon)(resources.GetObject("$this.PageIcon")));
         }
 
         #endregion
@@ -186,5 +201,6 @@
         internal Controls.Base.NGLabel lblCredentialsPassword;
         internal Controls.Base.NGTextBox txtCredentialsUsername;
         internal Controls.Base.NGLabel lblCredentialsDomain;
+        internal Controls.Base.NGCheckBox chkUseAdmPwd;
     }
 }

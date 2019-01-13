@@ -316,7 +316,7 @@ namespace mRemoteNG.UI.Window
 	        {
 	            lblCopyright.Text = GeneralAppInfo.Copyright;
 
-	            lblVersion.Text = $@"Version {GeneralAppInfo.ApplicationVersion}";
+	            lblVersion.Text = $@"Version {GeneralAppInfo.ApplicationVersion} (AdmPwd.E fork by GreyCorbel Solutions)";
 
 	            if (File.Exists(GeneralAppInfo.HomePath + "\\CHANGELOG.TXT"))
 	            {

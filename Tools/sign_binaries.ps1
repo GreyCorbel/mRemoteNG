@@ -11,7 +11,7 @@ param (
     # File names to exclude from signing
     $Exclude,
 
-    [string]
+    #[string]
     # The code signing certificate to use when signing the files.
     $CertificatePath,
 

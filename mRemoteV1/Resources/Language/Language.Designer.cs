@@ -7483,11 +7483,24 @@ namespace mRemoteNG {
         /// <summary>
         ///   Looks up a localized string similar to Upgrade.
         /// </summary>
-        internal static string strUpgrade {
-            get {
+        internal static string strUpgrade
+        {
+            get
+            {
                 return ResourceManager.GetString("strUpgrade", resourceCulture);
             }
         }
+        /// <summary>
+        ///   Looks up a localized string similar to Use AdmPwd.E to retrieve the password.
+        /// </summary>
+        internal static string strUseAdmPwd
+        {
+            get
+            {
+                return ResourceManager.GetString("strUseAdmPwd", resourceCulture);
+            }
+        }
+        
         
         /// <summary>
         ///   Looks up a localized string similar to Use Default.

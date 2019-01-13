@@ -106,76 +106,75 @@ namespace mRemoteNG.Connection.Protocol.ICA
 			}
 		}
         #endregion
-		
+
         #region Private Methods
-		private void SetCredentials()
-		{
-			try
-			{
-                if (((int)Force & (int)ConnectionInfo.Force.NoCredentials) == (int)ConnectionInfo.Force.NoCredentials)
-				{
-					return;
-				}
+        private void SetCredentials()
+        {
+            try
+            {
+                if (Force.HasFlag(ConnectionInfo.Force.NoCredentials))
+                {
+                    return;
+                }
 
-			    var user = _info?.Username ?? "";
-			    var pass = _info?.Password ?? "";
-			    var dom = _info?.Domain ?? "";
+                var user = _info?.Username ?? "";
+                var pass = _info?.Password ?? "";
+                var dom = _info?.Domain ?? "";
 
-				if (string.IsNullOrEmpty(user))
-				{
-					if (Settings.Default.EmptyCredentials == "windows")
-					{
-						_icaClient.Username = Environment.UserName;
-					}
-					else if (Settings.Default.EmptyCredentials == "custom")
-					{
-						_icaClient.Username = Settings.Default.DefaultUsername;
-					}
-				}
-				else
-				{
-					_icaClient.Username = user;
-				}
-						
-				if (string.IsNullOrEmpty(pass))
-				{
-					if (Settings.Default.EmptyCredentials == "custom")
-					{
-						if (Settings.Default.DefaultPassword != "")
-						{
+                if (string.IsNullOrEmpty(user))
+                {
+                    if (Settings.Default.EmptyCredentials == "windows")
+                    {
+                        user = Environment.UserName;
+                    }
+                    else if (Settings.Default.EmptyCredentials == "custom" || Settings.Default.EmptyCredentials == "admpwd")
+                    {
+                        user = Settings.Default.DefaultUsername;
+                    }
+                }
+                if (string.IsNullOrEmpty(dom))
+                {
+                    if (Settings.Default.EmptyCredentials == "windows")
+                    {
+                        dom = Environment.UserDomainName;
+                    }
+                    else if (Settings.Default.EmptyCredentials == "custom" || Settings.Default.EmptyCredentials == "admpwd")
+                    {
+                        dom = Settings.Default.DefaultDomain;
+                    }
+                }
+                _icaClient.Username = user;
+                _icaClient.Domain = dom;
+
+                if (string.IsNullOrEmpty(pass))
+                {
+                    if (Settings.Default.EmptyCredentials == "custom")
+                    {
+                        if (Settings.Default.DefaultPassword != "")
+                        {
                             var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
-                            _icaClient.SetProp("ClearPassword", cryptographyProvider.Decrypt(Settings.Default.DefaultPassword, Runtime.EncryptionKey));
-						}
-					}
-				}
-				else
-				{
-					_icaClient.SetProp("ClearPassword", pass);
-				}
-						
-				if (string.IsNullOrEmpty(dom))
-				{
-					if (Settings.Default.EmptyCredentials == "windows")
-					{
-						_icaClient.Domain = Environment.UserDomainName;
-					}
-					else if (Settings.Default.EmptyCredentials == "custom")
-					{
-						_icaClient.Domain = Settings.Default.DefaultDomain;
-					}
-				}
-				else
-				{
-					_icaClient.Domain = dom;
-				}
-			}
-			catch (Exception ex)
-			{
-				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strIcaSetCredentialsFailed + Environment.NewLine + ex.Message, true);
-			}
-		}
-				
-		private void SetResolution()
+                            pass = cryptographyProvider.Decrypt(Settings.Default.DefaultPassword, Runtime.EncryptionKey);
+                        }
+                    }
+                    if (Settings.Default.EmptyCredentials == "admpwd")
+                    {
+                        if (dom == ".")
+                            pass = AdmPwd.PDSUtils.PdsWrapper.GetLocalAdminPassword(null, _info.Hostname, false, false).Password;
+                        else
+                            pass = AdmPwd.PDSUtils.PdsWrapper.GetManagedAccountPassword(dom, user, false).Password;
+                    }
+                }
+
+                _icaClient.SetProp("ClearPassword", pass);
+
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strIcaSetCredentialsFailed + Environment.NewLine + ex.Message, true);
+            }
+        }
+
+        private void SetResolution()
 		{
 			try
 			{

@@ -2511,4 +2511,7 @@ mRemoteNG se nyní ukončí a zahájí instalaci.</value>
   <data name="strAssignedCredential" xml:space="preserve">
      <value>Přiřazené přihlašovací informace</value>
   </data>
-</root>
+  <data name="strUseAdmPwd" xml:space="preserve">
+    <value>Získat heslo pomocí AdmPwd.E</value>
+  </data>
+  </root>
