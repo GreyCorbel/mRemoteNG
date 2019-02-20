@@ -45,7 +45,7 @@
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <CertPath></CertPath>
+    <CertPath>C:\TFS\code_signing.pfx</CertPath>
     <CertPassword></CertPassword>
   </PropertyGroup>
   <ItemGroup>
