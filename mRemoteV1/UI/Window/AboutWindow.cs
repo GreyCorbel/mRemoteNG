@@ -322,14 +322,29 @@ namespace mRemoteNG.UI.Window
 	            {
 	                using (var sR = new StreamReader(GeneralAppInfo.HomePath + "\\CHANGELOG.TXT"))
 	                    txtChangeLog.Text = sR.ReadToEnd();
+                    txtChangeLog.Visible = true;
+                    lblChangeLog.Visible = true;
 	            }
+                else
+                {
+                    txtChangeLog.Visible = false;
+                    lblChangeLog.Visible = false;
+                }
 
-	            if (File.Exists(GeneralAppInfo.HomePath + "\\CREDITS.TXT"))
+                if (File.Exists(GeneralAppInfo.HomePath + "\\CREDITS.TXT"))
 	            {
 	                using (var sR = new StreamReader(GeneralAppInfo.HomePath + "\\CREDITS.TXT", Encoding.Default, true))
 	                    txtCredits.Text = sR.ReadToEnd();
-	            }
-	        }
+                    txtCredits.Visible = true;
+                    lblCredits.Visible = true;
+
+                }
+                else
+                {
+                    txtCredits.Visible = false;
+                    lblCredits.Visible = false;
+                }
+            }
 	        catch (Exception ex)
 	        {
 	            Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg,
